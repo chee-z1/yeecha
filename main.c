@@ -48,9 +48,8 @@ void calc_answer(char *an1, char *an2, int r1u, int r1d, int r2u, int r2d)
 	return;
 }
 
-int main()
+int cycle()
 {
-	srand(time(NULL));
 	// (r1dx - r1u)(r2dx - r2u)
 	int r1u = (rand() % 8) * ((rand() % 1) * 2 - 1);
 	int r1d = (rand() % 8) + ((rand() % 1) * 2 - 1);
@@ -70,21 +69,31 @@ int main()
 	char an1_r[20];
 	char an2_r[20];
 	// printf("%dx²%+dx%+d = %dx²%+dx%+d\n", a1, b1, c1, a2, b2, c2);
-	printf("%dx²%+dx%+d = 0\n", a, b, c);
+	printf("[ %dx²%+dx%+d = 0 ]\n> ", a, b, c);
+	fflush(stdout);
 	calc_answer(an1_r, an2_r, r1u, r1d, r2u, r2d);
 	scanf("%s %s", an1, an2);
 	if (!strcmp(an1, an1_r))
 		if (!strcmp(an2, an2_r))
-			printf("CORRECT!\n");
+			printf("CORRECT!\n\n");
 		else
-			printf("INCORRECT!: %s, %s\n", an2_r, an1_r);
+			printf("INCORRECT!: %s, %s\n\n", an2_r, an1_r);
 	else if (!strcmp(an1, an2_r))
 		if (!strcmp(an2, an1_r))
-			printf("CORRECT!\n");
+			printf("CORRECT!\n\n");
 		else
-			printf("INCORRECT!: %s, %s\n", an2_r, an1_r);
+			printf("INCORRECT!: %s, %s\n\n", an2_r, an1_r);
 	else 
-			printf("INCORRECT!: %s, %s\n", an2_r, an1_r);
+			printf("INCORRECT!: %s, %s\n\n", an2_r, an1_r);
 			
+	return 0;
+}
+
+int main()
+{
+	system("clear");
+	srand(time(NULL));
+	while (1)
+		cycle();
 	return 0;
 }
